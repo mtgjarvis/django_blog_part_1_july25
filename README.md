@@ -1,0 +1,1 @@
+# django_blog_part_1_july25
