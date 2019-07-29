@@ -8,19 +8,14 @@
 </head>
 <body>
     <h1>This is just the beginning of a Blog</h1>
-    <h2>The Current time is: {{ current_time }}</h2>
-
-    <ul>
-        <li>What is a client?</li>
-        <p>A client is the computer that is makign request, ie my computer.  It also recieves the data and intreprets.</p>
-        <li>What is a server?</li>
-        <p>The server is the computer that is recieving the request and serving to the client the requested data</p>
-        <li>What is an HTTP request?</li>
-        <p>A HTTP request is sent by the client and can take the form of CRUD, create, read, update and delete.</p>
-        <li>What is an HTTP response?</li>
-        <p>A HTTP respose is the servers answer to the request, sending back the required information and/or an appropiate status code</p>
-        <li>What is Django and why do we use it?</li>
-        <p>Django is an open-source python web framework used for rapid development, pragmatic, maintainable, clean design, and secures websites. A web application framework is a toolkit of all components need for application development. The main goal of the Django framework is to allow developers to focus on components of the application that are new instead of spending time on already developed components. Django is fully featured than many other frameworks on the market. It takes care of a lot of hassle involved in the web development; enables users to focus on developing components needed for their application..</p>
-    </ul>
+    <h2>Todays date: {{ date }}</h2>
+    {% for article in articles %}
+        {% if article.draft == False %}
+            <h2>{{ article.title }}</h2>
+            <h4>By: {{ article.author  }}</h4>
+            <p>{{  article.body }}</p>
+            <p>{{ article.published_date }}</p>
+        {% endif %}
+    {% endfor %}
 </body>
 </html>
