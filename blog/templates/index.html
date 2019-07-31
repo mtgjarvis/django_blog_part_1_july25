@@ -1,21 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    <h1>This is just the beginning of a Blog</h1>
-    <h2>Todays date: {{ date }}</h2>
-    {% for article in articles %}
-        {% if article.draft == False %}
-            <h2>{{ article.title }}</h2>
-            <h4>By: {{ article.author  }}</h4>
-            <p>{{  article.body }}</p>
-            <p>{{ article.published_date }}</p>
-        {% endif %}
-    {% endfor %}
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}
+    All Blog Posts
+{% endblock %}
+
+
+{% block content %}
+    <div class="all">
+        <h1>List of Blog Posts</h1>
+            <ul>
+                {% for blog in blogs %}
+                <li>
+                    <a href="/home/{{ blog.pk }}">{{ blog }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+    </div>
+{% endblock %}

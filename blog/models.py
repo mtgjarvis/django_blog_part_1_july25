@@ -1,4 +1,5 @@
 from django.db import models
+from django.forms import ModelForm
 
 
 class Article(models.Model):
@@ -9,4 +10,9 @@ class Article(models.Model):
     author = models.CharField(max_length=255)
 
     def __str__(self):
-        return f'{self.title} {self.author}'
+        return f"{self.title} {self.author}"
+
+
+class ArticleForm(ModelForm):
+    model = Article
+    fields = ['title', 'body', 'draft', 'published_date', 'author']

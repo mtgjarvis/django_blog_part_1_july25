@@ -1,0 +1,10 @@
+<h1>{{  message  }}</h1>
+
+
+<form action="{{ action }}" method="POST">
+
+    {% crsf_token %}
+
+    {{ form.as_p }}
+
+</form>
