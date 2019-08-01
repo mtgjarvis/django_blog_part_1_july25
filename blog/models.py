@@ -10,9 +10,16 @@ class Article(models.Model):
     author = models.CharField(max_length=255)
 
     def __str__(self):
-        return f"{self.title} {self.author}"
+        return f"{self.title}"
 
 
 class ArticleForm(ModelForm):
     model = Article
     fields = ['title', 'body', 'draft', 'published_date', 'author']
+
+
+class Comment(models.Model):
+    name = models.CharField(max_length=255)
+    created_at = models.DateTimeField(auto_now_add=True)
+    message = models.TextField(null=True)
+    article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name='comments')
