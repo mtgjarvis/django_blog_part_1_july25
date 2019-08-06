@@ -1,7 +1,7 @@
 from datetime import datetime
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
-from blog.models import Article, ArticleForm, Comment
+from blog.models import Article, ArticleForm, Comment, CommentForm
 
 
 def root(request):
@@ -34,18 +34,20 @@ def create_comment(request):
     message = request.POST['message']
     new_comment = Comment(article=article, name=name, message=message)
     new_comment.save()
+    # form = CommentForm(request.POST)
+    # context = []
     return HttpResponseRedirect(f'/home/{article_id}')
 
 
 def new_article(request):
     form = ArticleForm()
-    context = {"form": form, "message": "Create New Article", "action": "home/create_article"}
+    context = {"form": form, "message": "Create New Article", "action": "create_article"}
     return render(request, "form.html", context)
 
 
 def create_article(request):
     form = ArticleForm(request.POST)
-    form.save
+    form.save()
     return HttpResponseRedirect("/home")
 
 # def post_show(request):
