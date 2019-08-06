@@ -24,5 +24,7 @@ urlpatterns = [
     path('home/', views.home_page),
     path('home/<int:id>/', views.show),
     path('comments/new', views.create_comment, name='create_comment'),
+    path('home/create_article', views.create_article, name='create_article'),
+    path('home/new_article', views.new_article)
     # path('home/<int:id>', post_show, name='post_details'),
 ]

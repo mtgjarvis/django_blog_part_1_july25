@@ -26,6 +26,7 @@ def show(request, id):
     context = {"article": article}
     return render(request, "show.html", context)
 
+
 def create_comment(request):
     article_id = request.POST['article']
     article = Article.objects.filter(id=article_id).first()
@@ -34,6 +35,18 @@ def create_comment(request):
     new_comment = Comment(article=article, name=name, message=message)
     new_comment.save()
     return HttpResponseRedirect(f'/home/{article_id}')
+
+
+def new_article(request):
+    form = ArticleForm()
+    context = {"form": form, "message": "Create New Article", "action": "home/create_article"}
+    return render(request, "form.html", context)
+
+
+def create_article(request):
+    form = ArticleForm(request.POST)
+    form.save
+    return HttpResponseRedirect("/home")
 
 # def post_show(request):
 #     article = Article.objects.get(pk=id)

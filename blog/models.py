@@ -14,8 +14,9 @@ class Article(models.Model):
 
 
 class ArticleForm(ModelForm):
-    model = Article
-    fields = ['title', 'body', 'draft', 'published_date', 'author']
+    class Meta:
+        model = Article
+        fields = ['title', 'body', 'draft', 'published_date', 'author']
 
 
 class Comment(models.Model):
