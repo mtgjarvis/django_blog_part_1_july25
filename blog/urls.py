@@ -25,6 +25,9 @@ urlpatterns = [
     path('home/<int:id>/', views.show),
     path('comments/new', views.create_comment, name='create_comment'),
     path('home/create_article', views.create_article, name='create_article'),
-    path('home/new_article', views.new_article)
+    path('home/new_article', views.new_article),
+    path('login/', views.login_view, name='login'),
+    path('logout/', views.logout_view, name='logout'),
+    path('signup/', views.signup, name='signup'),
     # path('home/<int:id>', post_show, name='post_details'),
 ]

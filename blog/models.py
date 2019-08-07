@@ -3,6 +3,7 @@ from django.forms import ModelForm, DateInput
 from datetime import date
 from django.core.validators import MinLengthValidator
 from django.core.exceptions import ValidationError
+from django.contrib.auth.models import User
 
 
 class Article(models.Model):
@@ -11,6 +12,7 @@ class Article(models.Model):
     draft = models.BooleanField(default=True)
     published_date = models.DateField()
     author = models.CharField(max_length=255)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='Article')
 
     def __str__(self):
         return f"{self.title}"
@@ -23,7 +25,7 @@ class DateInput(DateInput):
 class ArticleForm(ModelForm):
     class Meta:
         model = Article
-        fields = ['title', 'body', 'draft', 'published_date', 'author']
+        fields = ['title', 'body', 'draft', 'published_date', 'author', 'user']
         widgets = {'published_date': DateInput(), }
 
     def clean(self):
@@ -33,10 +35,12 @@ class ArticleForm(ModelForm):
         today = date.today()
         if cleaned_data.get('draft'):
             if pub_date <= today:
-                self.add_error('published_date', 'Draft articles must have a future date')
+                self.add_error(
+                    'published_date', 'Draft articles must have a future date')
         else:
             if pub_date > today:
-                self.add_error('published_date', 'Published articles must have furture date')
+                self.add_error(
+                    'published_date', 'Published articles must have current date')
 
 
 class Comment(models.Model):
